@@ -1,6 +1,12 @@
 # macOS
 .DS_Store
 
+# Chapters (unpublished drafts — keep private)
+chapters/
+
+# Paper drafts
+paper/
+
 # Word temp files
 ~$*
 
