@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Word temp files
+~$*
+
+# Dropbox conflict copies
+*conflicted copy*
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Large folders not part of replication
+archive_may2026/
+presentations/
+literature/
+old drafts/
+
+# Publisher correspondence (private)
+BUP/
+publisher/
+proposal feedback/
+reviews/
+
+# Background research files
+background/
+Rosie_demo/
+
+# General admin
+general/
