@@ -36,3 +36,21 @@ Rosie_demo/
 
 # General admin
 general/
+
+# Working material — GitHub only holds README + the one road-tested example
+# (5 Aug 2026: history purged of the Checkpoint-22Jul pipeline + a leaked
+# recovery-codes PDF; nothing here should go public until it's road-tested)
+.here
+comments/
+methods/
+notes/
+outputs/
+planning/
+tables/
+figures/
+scripts/marss/
+data/raw/
+data/processed/*
+!data/processed/cabinet_annual_departures.csv
+scripts/*
+!scripts/03_cabinet_turnover.R
