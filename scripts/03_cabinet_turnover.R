@@ -1,3 +1,19 @@
+# ⭐ PROMOTED TO CANONICAL, 17 Aug 2026. This file WAS the _NOCHOW variant; PJ, 17 Aug:
+#   "do it, need to sort out file mess!". The pre-Chow-removal original is preserved at
+#   _ARCHIVE/scripts/superseded_17aug_prechow_scripts/scripts/03_cabinet_turnover.R
+# ✅ This is now the live script for the printed figure and IT IS FINE TO HAND-EDIT.
+#   (The 'AUTO-DERIVED / DO NOT HAND-EDIT' lines below described the old derived copy and
+#   no longer apply — there is no generator to re-run over this file.)
+# 03_cabinet_turnover.R — AUTO-DERIVED 17 Aug 2026. ⛔ DO NOT HAND-EDIT.
+# 1. Chow panel (p_bot) removed, with the subtitle that narrated it ("Bottom: Chow F-statistic
+#    with and without 2022").
+# 2. ⭐ RENUMBERED 2.5 -> 2.4 (old Figure 2.3 dropped, so everything shifts down one).
+# 3. ⭐ CROSS-REFERENCE FIXED: the caption pointed at "Fig 2.4" for the Great Officers figure,
+#    which is now Figure 2.3. This is exactly the kind of reference the 16 Aug renumbering
+#    missed, so it is corrected in the same step rather than left for a sweep.
+# ⚠ Cabinet departures prefer a LINEAR trend (+0.271/yr); a break is 3.04 BIC worse. The Chow
+#   is still computed and printed to the console; only its panel is removed.
+
 # ============================================================
 # 03_cabinet_turnover.R
 # Annual full-cabinet departures, 1979–2026
@@ -9,7 +25,14 @@
 # ============================================================
 
 rm(list = ls())
-setwd("/Users/peterjohn/Library/CloudStorage/Dropbox/Documents/Who Killed British Democracy?")
+.ROOT <- local({
+  a <- commandArgs(trailingOnly = FALSE)
+  m <- grep("^--file=", a, value = TRUE)
+  if (length(m) == 1) normalizePath(file.path(dirname(sub("^--file=", "", m)), ".."))
+  else getwd()
+})  # portable project root: works via Rscript from anywhere, or falls back to
+    # getwd() when sourced interactively (assumes repo root as cwd)
+setwd(.ROOT)
 
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(dplyr, ggplot2, tidyr, readr, lubridate, patchwork)
@@ -219,31 +242,23 @@ p_bot <- ggplot(fs_both, aes(x = year, y = fstat, linetype = series)) +
     legend.background  = element_rect(fill = "white", colour = NA)
   )
 
-fig <- p_top / p_bot +
-  plot_layout(heights = c(2, 1)) +
+fig <- p_top +
   plot_annotation(
-    title = "Figure 2.5: Annual cabinet departures (excluding Great Officers), 1979\u20132025",
-    subtitle = paste0(
-      "Top: full cabinet departures per year (IfG data). ",
-      "Bottom: Chow F-statistic with and without 2022.\n",
-      "All years: break at ", res_all$bp$year,
-      ", F = ", round(res_all$bp$fstat, 2),
-      ", perm. p = ", round(res_all$perm_p, 3),
-      ". Excl. 2022: break at ", res_ex$bp$year,
-      ", F = ", round(res_ex$bp$fstat, 2),
-      ", perm. p = ", round(res_ex$perm_p, 3), "."
-    ),
-    caption = "Source: Institute for Government ministers database. Great Officers excluded (see Fig 2.4).",
+    title = "Figure 2.3: Annual cabinet departures (excluding Great Officers), 1979\u20132025",
+    caption = "Source: Institute for Government ministers database. Great Officers excluded (see Figure 2.2).",
     theme = theme(
-      plot.title    = element_text(face = "bold", size = 11),
-      plot.subtitle = element_text(size = 8.5, colour = "grey30", lineheight = 1.2),
-      plot.caption  = element_text(size = 7, colour = "grey40")
+# 17 Aug, PJ: "some of the titles are too small typface". Title size was a raw pt value while
+# canvases run 6.5-10 in, so the SAME pt looked large on a narrow figure and small on a wide
+# one - a 68% spread in apparent size. Titles are now set at ~1.75 pt per inch of canvas
+# (this figure is 9.0 in wide, so 15.5 pt), which is the ratio the narrow figures already had.
+      plot.title   = element_text(face = "bold", size = 15.5),
+      plot.caption = element_text(size = 7, colour = "grey40")
     )
   )
 
-ggsave("figures/fig_2_5_cabinet_turnover.png",
-       fig, width = 9, height = 6, dpi = 300)
-cat("\nSaved: figures/fig_2_5_cabinet_turnover.png\n")
+ggsave("figures/fig_2_3_cabinet_turnover.png",
+       fig, width = 9, height = 4.2, dpi = 300)
+cat("\nSaved: figures/fig_2_3_cabinet_turnover.png\n")
 
 # ============================================================
 # SAVE ANNUAL SERIES (for later combining)

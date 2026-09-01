@@ -54,3 +54,26 @@ data/processed/*
 !data/processed/cabinet_annual_departures.csv
 scripts/*
 !scripts/03_cabinet_turnover.R
+
+# Added 1 Sep 2026 — these existed untracked and UNIGNORED (would be swept
+# up by a plain `git add -A`/`git add .` into this public repo). Includes
+# 33GB in data_may2026/ and raw source material in sources_raw/.
+_ARCHIVE/
+WKBD_repo/
+data_workspace_2026-07/
+data_may2026/
+sources_raw/
+online_appendix/
+project_history/
+validation_checks/
+
+# One-off admin/scratch files that showed up untracked alongside the above
+Rplots.pdf
+working_notes.md
+guidetips.md
+WKBD_review_20jul.html
+TRANSITION_NEW_MAC_19AUG.md
+
+# Licensed survey microdata (BES panels etc.) — redistribution restricted,
+# must never go into the public repo. Loose .dta files sit directly in data/.
+data/*.dta
