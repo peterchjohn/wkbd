@@ -1,0 +1,7 @@
+year,n_speeches,mean_self_ratio,se_self_ratio,source
+2020,1495,0.34452109194794045,0.004427933273099673,"Official Hansard API (live pull), Chamber+Westminster Hall"
+2021,1490,0.3491137216616649,0.0045427102909370255,"Official Hansard API (live pull), Chamber+Westminster Hall"
+2022,1492,0.37015361006236475,0.004342699277498735,"Official Hansard API (live pull), Chamber+Westminster Hall"
+2023,1494,0.3627730713984132,0.004439603077966425,"Official Hansard API (live pull), Chamber+Westminster Hall"
+2024,1495,0.3548739100430031,0.004472290664317723,"Official Hansard API (live pull), Chamber+Westminster Hall"
+2025,1496,0.34542491339071435,0.004419056439287406,"Official Hansard API (live pull), Chamber+Westminster Hall"

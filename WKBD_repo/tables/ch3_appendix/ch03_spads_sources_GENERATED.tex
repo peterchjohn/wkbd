@@ -1,0 +1,40 @@
+% GENERATED from data_workspace_2026-07/ch3_pipeline_restored/data/raw/spads_DATA_ENTRY.csv
+% (14 Sep 2026) -- built because footnote 17 promises "exact source details" in the Online
+% Appendix, and no current, citable table held them (the only prior SPADs table,
+% online_appendix/appendix_chapters/ch03.tex, is stale content predating the four-appendix
+% restructuring -- references a since-renumbered Figure 3.14 and an RC01-RC04 scheme superseded
+% by robustness_chapters/ch03.tex's RC13-RC18, and was never retired).
+% Do not edit by hand -- rerun against the CSV if the underlying data changes.
+\begin{table}[htbp]\centering
+\caption{Special advisers (SPADs) in post, year by year: sources and verification status}
+\begin{threeparttable}
+\begin{tabular}{r r l p{7.2cm}}
+\toprule
+Year & $N$ & Status & Source \\
+\midrule
+1979 & 8   & Estimated & Yong \& Hazell (2014), \emph{Special Advisers} (Hart Publishing) \\
+1985 & 18  & Estimated & Yong \& Hazell (2014) \\
+1990 & 23  & Estimated & Yong \& Hazell (2014) \\
+1992 & 38  & Estimated & Yong \& Hazell (2014) / IfG \\
+1997 & 70  & Estimated & Yong \& Hazell (2014) / IfG \\
+2004 & 84  & Estimated & IfG / civilservant.org.uk \\
+2010 & 66  & Not independently re-verified & Cabinet Office special adviser data release, 10 June 2010 snapshot; row-counted from the published name list \\
+2012 & 83  & Not independently re-verified & Cabinet Office special adviser data release, 19 October 2012; row-counted \\
+2013 & 108 & Not independently re-verified & Cabinet Office special adviser data release, special advisers in post at 25 October 2013; row-counted \\
+2015 & 95  & Not independently re-verified & ``Special advisers in post, 17 December 2015'' (list document, no stated summary total -- requires manual count) \\
+2016 & 83  & Not independently re-verified & ``List of Special Advisers in post as at 21 December 2016'' (list document, no stated summary total -- requires manual count) \\
+2018 & 99  & Verified (FTE only) & Annual Report on Special Advisers 2018: ``As of 18 December 2018, there are 99.2 (full time equivalent) Special Advisers'' -- no separate headcount given \\
+2019 & 108 & Verified (FTE only) & Annual Report on Special Advisers 2019: ``As at 5 November 2019, there were 108.4 (full time equivalent) special advisers'' -- no separate headcount given \\
+2020 & 116 & Verified (headcount) & Annual Report on Special Advisers 2020: ``as at 15 December, which equates to 116 (114.7 full-time equivalent) special advisers'' -- 116 is the headcount \\
+2021 & 113 & Verified (headcount) & Annual Report on Special Advisers 2021: ``As at 31 March 2021, there were 113 (111.7 full-time equivalent) special advisers'' \\
+2022 & 126 & Verified (headcount) & Annual Report on Special Advisers 2022: ``As at 31 March 2022, there were 126 (124.7 full-time equivalent) special advisers'' \\
+2024 & 128 & Verified (headcount) & Annual Report on Special Advisers 2024: ``As at 31 March 2024, there were 128 (125.85 full-time equivalent) special advisers'' \\
+2025 & 130 & Verified (headcount) & Annual Report on Special Advisers 2025: ``As at 31 March 2025, there were 130 (128.67 full-time equivalent) special advisers'' \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Source: \texttt{data\_workspace\_2026-07/ch3\_pipeline\_restored/data/raw/spads\_DATA\_ENTRY.csv}. ``Estimated'' rows (1979--2004) are Yong \& Hazell's own published estimates, not raw counts. ``Not independently re-verified'' rows (2010--2016) are row-counts of official Cabinet Office name-list releases performed once, on 4 Sep 2026, but not cross-checked against a second count. ``Verified'' rows (2018--2025) quote the Annual Report on Special Advisers' own stated total verbatim; 2018--2019 give only an FTE figure with no separate headcount, while 2020 onward states both and this table reports the headcount. Gap years between observations are interpolated for the figure/index construction (see \texttt{41e\_professionalisation\_pca.R}) -- this table gives only the directly observed/estimated points, not the interpolated series.
+\end{tablenotes}
+\end{threeparttable}
+\label{tab:ch03spadssources}
+\end{table}

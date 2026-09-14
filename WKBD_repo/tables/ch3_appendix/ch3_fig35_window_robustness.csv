@@ -1,0 +1,21 @@
+spec,period,mean_standalone_rate,n_standalone_total
+"Baseline (14d lateral, +-3d gov)",1979-88,2.4116997598734717,274
+"Baseline (14d lateral, +-3d gov)",1989-97,3.8971721047272028,274
+"Baseline (14d lateral, +-3d gov)",1998-2009,3.291225636313663,274
+"Baseline (14d lateral, +-3d gov)",2010-19,7.426338654417505,274
+"Baseline (14d lateral, +-3d gov)",2020-25,6.269214939989588,274
+Tighter lateral window (7d),1979-88,2.5943519700486175,280
+Tighter lateral window (7d),1989-97,3.8971721047272028,280
+Tighter lateral window (7d),1998-2009,3.3584299373889315,280
+Tighter lateral window (7d),2010-19,7.426338654417505,280
+Tighter lateral window (7d),2020-25,6.609350994411356,280
+Looser lateral window (30d),1979-88,2.4116997598734717,269
+Looser lateral window (30d),1989-97,3.8971721047272028,269
+Looser lateral window (30d),1998-2009,3.0068840497683835,269
+Looser lateral window (30d),2010-19,7.426338654417505,269
+Looser lateral window (30d),2020-25,6.269214939989588,269
+Looser gov-ended window (+-7d),1979-88,2.4116997598734717,271
+Looser gov-ended window (+-7d),1989-97,3.802205343093774,271
+Looser gov-ended window (+-7d),1998-2009,3.291225636313663,271
+Looser gov-ended window (+-7d),2010-19,7.353874886301564,271
+Looser gov-ended window (+-7d),2020-25,6.153474199248847,271

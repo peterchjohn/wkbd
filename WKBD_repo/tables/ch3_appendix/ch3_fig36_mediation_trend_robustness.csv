@@ -1,0 +1,25 @@
+spec,se_type,path,term,estimate,p_value,verdict
+baseline_quadratic,OLS,prof_to_turbulence_direct,prof_pc1 (linear),0.313,0.0042,significant
+baseline_quadratic,OLS,prof_to_turbulence_direct,prof_pc1 (quadratic),0.330,0.0000,significant
+baseline_quadratic,OLS,prof_to_turbulence_total,prof_pc1 (linear),0.303,0.0034,significant
+baseline_quadratic,OLS,prof_to_turbulence_total,prof_pc1 (quadratic),0.319,0.0000,significant
+baseline_quadratic,OLS,prof_to_trust,prof_pc1,-1.069,0.0583,marginal
+baseline_quadratic,OLS,indirect_ACME,a x b,-0.010,0.748,not_significant
+baseline_quadratic,HAC,prof_to_turbulence_direct,prof_pc1 (linear),0.313,0.0056,significant
+baseline_quadratic,HAC,prof_to_turbulence_direct,prof_pc1 (quadratic),0.330,0.0000,significant
+baseline_quadratic,HAC,prof_to_trust,prof_pc1,-1.069,0.1507,not_significant
+trend_adjusted,OLS,prof_to_turbulence_direct,prof_pc1 (linear),0.884,0.3706,not_significant
+trend_adjusted,OLS,prof_to_turbulence_direct,prof_pc1 (quadratic),-0.078,0.8151,not_significant
+trend_adjusted,OLS,prof_to_turbulence_total,prof_pc1 (linear),0.879,0.3695,not_significant
+trend_adjusted,OLS,prof_to_turbulence_total,prof_pc1 (quadratic),-0.062,0.8496,not_significant
+trend_adjusted,OLS,prof_to_trust,prof_pc1,0.440,0.9257,not_significant
+trend_adjusted,OLS,indirect_ACME,a x b,0.012,0.956,not_significant
+trend_adjusted,HAC,prof_to_turbulence_direct,prof_pc1 (linear),0.884,0.2030,not_significant
+trend_adjusted,HAC,prof_to_turbulence_direct,prof_pc1 (quadratic),-0.078,0.7504,not_significant
+trend_adjusted,HAC,prof_to_trust,prof_pc1,0.440,0.9089,not_significant
+first_difference,OLS,prof_to_turbulence_direct,d_prof,-0.129,0.9043,not_significant
+first_difference,OLS,prof_to_turbulence_total,d_prof,-0.092,0.9302,not_significant
+first_difference,OLS,prof_to_trust,d_prof,6.131,0.3421,not_significant
+first_difference,OLS,trust_to_turbulence,d_trust,0.006,0.8099,not_significant
+first_difference,HAC,prof_to_turbulence_direct,d_prof,-0.129,0.9096,not_significant
+first_difference,HAC,prof_to_trust,d_prof,6.131,0.3814,not_significant

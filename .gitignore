@@ -59,13 +59,33 @@ scripts/*
 # up by a plain `git add -A`/`git add .` into this public repo). Includes
 # 33GB in data_may2026/ and raw source material in sources_raw/.
 _ARCHIVE/
-WKBD_repo/
 data_workspace_2026-07/
 data_may2026/
 sources_raw/
 online_appendix/
 project_history/
 validation_checks/
+
+# 14 Sep 2026 — WKBD_repo/ is now road-tested (path-portability fixed, Ch2+Ch3 both
+# mirrored, appendix tables included) and un-ignored so it can actually go public.
+# Two subfolders stay excluded even so:
+#   - codex_replication/ is a separate, NOT builder-managed third-party AI-audit sandbox
+#     (its own ERRORS_FOR_CLAUDE_CODE.md notes are internal, not replication content)
+#   - manuscript/ holds the actual Chapter Two book text — publishing manuscript prose
+#     needs its own explicit go-ahead, not a side effect of the code/data/appendix mirror
+#     going live; not confirmed this session (today's scope discussion was about Chapter
+#     Three's code/data/appendix, not Chapter Two's manuscript text).
+WKBD_repo/codex_replication/
+WKBD_repo/manuscript/
+
+# ⚠ Found while un-ignoring WKBD_repo/ above: the older root-level "figures/" and "tables/"
+# rules further up this file (no leading "/", so gitignore treats them as unanchored and they
+# ALSO match WKBD_repo/figures/ and WKBD_repo/tables/, not just the top-level working-tree
+# folders they were written for) were silently blocking every figure and appendix table in the
+# mirror even after WKBD_repo/ itself was un-ignored. Never surfaced before because WKBD_repo/
+# was fully blanket-ignored anyway. Explicit re-un-ignore needed here.
+!WKBD_repo/figures/
+!WKBD_repo/tables/
 
 # One-off admin/scratch files that showed up untracked alongside the above
 Rplots.pdf

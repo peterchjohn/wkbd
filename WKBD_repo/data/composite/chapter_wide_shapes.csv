@@ -1,0 +1,14 @@
+"series","n","kind","shape","detail","dBIC_next","flat_dBIC","linear_dBIC","break_dBIC","break_yr","bend_knot"
+"Fig 2.2  Great office departures",46,"COUNT","flat","",0.12,0,1.18,3.79,2010,2015
+"Fig 2.3  Cabinet departures",46,"COUNT","linear","slope +0.2708/yr",0,3.94,0,3.04,2010,2017
+"Fig 2.6  Electoral volatility",48,"continuous","spline","edf 8.22",2.25,70.21,53.46,2.25,2011,2016
+"Fig 2.8  Agenda diversity (ENI)",47,"continuous","break","break 2014",2.43,90.77,2.43,0,2014,2019
+"Fig 2.8  Agenda churn (KL)",47,"continuous","linear","slope -0.0027/yr",0.51,1.96,0,2.89,1989,2006
+"Fig 2.9  Unexpected movements",46,"continuous","break","break 1985",3.65,54.33,58.16,0,1985,1985
+"Fig 2.10 Parliamentary dislocation",48,"continuous","break","break 2016",2.69,23.31,24.86,0,2016,2005
+"Fig 2.10 Backbench rebellions",46,"continuous","spline","edf 8.00",31.75,75.13,45.91,31.75,2016,2018
+"Fig 2.11 Policy agenda churn",43,"continuous","flat","",0.49,0,0.49,5.62,1996,1989
+"Fig 2.12 Machinery of government",47,"COUNT","linear","slope +0.0289/yr",0,0.31,0,8.59,2010,2014
+"Fig 2.13 NAO delivery failure",41,"COUNT","break","break 2015",11.77,60.71,14.63,0,2015,2018
+"Fig 2.15 U-turns",47,"COUNT","flat","",1.27,0,3.8,1.27,1996,2011
+"Fig 2.16 Turbulence index (composite)",47,"continuous","bend (adopted; BIC winner = spline)","knot 2012 (slope -0.033 -> +0.325)",14.14,35.46,32.98,14.16,2015,2012

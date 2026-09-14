@@ -1,0 +1,44 @@
+% GENERATED from 69_gender_benchmark_misconduct.R and 70_lords_scandal_breaktest.R (12 Sep 2026);
+% local government row added from 73_gender_benchmark_localgov.R (14 Sep 2026).
+% Do not edit by hand -- rerun those scripts and copy the numbers if the underlying data changes.
+\begin{table}[htbp]\centering
+\caption{Gender-benchmark tests, Ch3 bad-behaviour cases}
+\begin{threeparttable}
+\begin{tabular}{lrrrr}
+\toprule
+Case list & $N$ & Expected $E[X]$ & Observed & $P(X \le \text{obs.})$ \\
+\midrule
+Commons misconduct (Fig.\ 3.3) & 11 & 3.20 & 2 & 0.335 \\
+House of Lords                 & 12 & 2.42 & 1 & 0.267 \\
+Devolved (Scotland + Wales)     &  7 & 2.83 & 1 & 0.151 \\
+Local government (all 4 UK nations) & 7 & 2.09 & 2 & 0.651 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Source: \texttt{69\_gender\_benchmark\_misconduct.R} (Commons, Lords, Devolved); \texttt{73\_gender\_benchmark\_localgov.R} (Local government). Exact Poisson-binomial test (each case benchmarked against the actual women's share of the relevant chamber/council in the year it occurred, not a flat overall rate); none significant. Commons is the systematic Mortimore \& Blick series; Lords, Devolved, and Local government are illustrative web-compiled lists, not a census -- see \texttt{sources\_raw/lords\_gender\_composition/SOURCE\_NOTE.md} and \texttt{sources\_raw/local\_govt\_scandals\_web\_compiled/SOURCE\_NOTE.md}. Local government benchmarks each case against its own nation's (England/Scotland/Wales/Northern Ireland) general councillor gender share, not a leadership-specific rate, since the case list was not leadership-restricted by construction.
+\end{tablenotes}
+\end{threeparttable}
+\label{tab:ch03gendertests}
+\end{table}
+
+\begin{table}[htbp]\centering
+\caption{House of Lords case list: Poisson change-point test for a timing increase}
+\begin{threeparttable}
+\begin{tabular}{lr}
+\toprule
+Statistic & Value \\
+\midrule
+Peak break year & 2000 \\
+Likelihood-ratio statistic & 8.52 \\
+Next-best candidate years (LR) & 1999 (7.75), 2004 (7.67), 2008 (7.50) \\
+Permutation $p$-value (10,000 draws) & 0.081 \\
+Rate before break & 0.045 events/year \\
+Rate from break onward & 0.440 events/year \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Source: \texttt{70\_lords\_scandal\_breaktest.R}. Same Poisson change-point/permutation method as the Commons ministerial-scandal test (Fig.\ 3.5 Panel C). Not significant at 5\%, and the exact break year is not well pinned down at $N=12$ events -- several nearby years score almost as well as the peak, so read this as "quiet, then a sustained rise from around the turn of the century," not a precisely dated break. The underlying case list is web-compiled, not a census, and search-era visibility bias (recent cases are easier to find than 1980s-90s ones) could produce an apparent increase like this even absent any real change -- treat as suggestive only, not a clean finding the way the Commons equivalent test is.
+\end{tablenotes}
+\end{threeparttable}
+\label{tab:ch03lordstiming}
+\end{table}

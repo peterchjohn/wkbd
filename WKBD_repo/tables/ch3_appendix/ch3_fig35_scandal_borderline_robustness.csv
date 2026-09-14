@@ -1,0 +1,5 @@
+test,series,peak_break_year,statistic,perm_p
+Chow mean-shift,Base (N=12),1993,4.566412109614871,0.235
+Chow mean-shift,+Fox+Siddiq (N=14),1993,5.39405881559338,0.1764
+Poisson rare-event LR,Base (N=12),1993,7.826245823275244,0.12433333333333334
+Poisson rare-event LR,+Fox+Siddiq (N=14),1993,9.13062014785767,0.094

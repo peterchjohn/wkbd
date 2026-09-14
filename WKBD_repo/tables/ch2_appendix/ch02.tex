@@ -1,0 +1,821 @@
+% Appendix A, Chapter 2 — robustness checks. Content mirrors robustness_checks/README.md's index
+% and the individual RCNN_note.md files. Regenerate/extend as further checks are run.
+
+\section{Summary of checks run}
+
+\begin{threeparttable}
+\caption{Robustness checks, Chapter Two}
+\begin{tabular}{p{1.1cm} p{3.5cm} p{4.3cm} p{3.6cm}}
+\toprule
+Check & Baseline & Alternative specification & Verdict \\
+\midrule
+RC01 & Four-bloc Pedersen index (Con/Lab/LD/Other) & Eight-party, fuller coding & \textbf{Survives}
+--- break test identical, $r=0.99$ \\
+RC02 & Figure 2.9 Panel B, level only & Adds persistence: rolling AR(1) of the composite &
+\textbf{Survives, qualified} --- moderate persistence (0.36 whole-series), so not pure churn;
+COVID-era exception flagged \\
+RC03 & Figure 2.9 composite: $R^2 \geq 0.40$ inclusion floor, 10\% Chow trim, 2020--21 COVID
+exclusion & Floor lowered to $R^2 \geq 0.30$, recovering Immigration, Housing and Pensions
+(5 $\rightarrow$ 8 items) & \textbf{Survives; floor retained at 0.40} --- same break year (1985),
+$F$ falls 83.17 $\rightarrow$ 51.44, still $p<0.0001$ \\
+RC04 & Figure 2.9's OLS-residual ``unexpected'' measure (5 domains, break 1985, $F=83.17$) &
+Restricted slope\,$=1$ z-score gap, all 13 domains, no exclusion & \textbf{Rejected as a main
+measure}, reasons disclosed --- see below \\
+RC10 & Figure 2.15 U-turns: raw annual count, 221 events & (i) per 100,000 characters of chapter;
+(ii) high-confidence events only; (iii) narrowly specified commitments only &
+\textbf{Moves, reverses, survives} --- (i) reverses the early--late comparison, both reported;
+(ii) reverses, but is \textbf{inadmissible} (era-dependent filter); (iii) survives \\
+RC11 & Figure 2.16 turbulence index: segmented (bend) fit, knot 2013 & Flat, linear trend,
+quadratic, single break, thin-plate spline --- compared on BIC, AIC, leave-one-out CV and
+AR(1)-error BIC & \textbf{Survives as a \emph{shape}; the form and date are not identified} ---
+flat and linear rejected ($\Delta$BIC 27.4, 16.8); bend, break and spline indistinguishable
+($\Delta$BIC $\leq0.71$) \\
+RC12 & The volatility curse (Campello \& Zucco) as the bridge from turbulence to democratic
+consequence & Attribution link measured two ways ($R^2$ and standardised slope) over three eras,
+11 agenda items; plus four related causal claims & \textbf{Not found} --- $R^2$ decays but the
+range-restriction-proof slope does not ($p=0.65$); four further claims all vanish under a time
+trend \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Full detail for each check is in its own folder: \texttt{robustness\_checks/RCNN\_chX\_
+shortname/RCNN\_note.md}, with regenerated outputs alongside.
+\item Two further checks exist as their own folders and are not yet written up here: a replication
+of the Camargo analysis, and a single-mention variant of the public-opinion series.
+\end{tablenotes}
+\end{threeparttable}
+
+\section{RC03 --- the inclusion floor, and why it was retained}
+
+The Figure 2.9 composite includes issue domains whose tracking regression clears an $R^2$ floor of
+0.40. That threshold is discretionary, so it was tested directly. Lowering it to 0.30 recovers three
+further domains (Immigration, Housing, Pensions), taking the composite from five items to eight.
+
+The finding does not depend on the choice: the break year is unchanged at 1985, and the statistic
+weakens but remains overwhelming ($F$ from 83.17 to 51.44, $p<0.0001$ throughout).
+
+The floor was nonetheless retained at 0.40, for a stated reason rather than by default. The
+threshold sits inside a genuine gap in the data --- five domains cluster between $R^2$ of 0.60 and
+0.90, and the next-best item sits at 0.35, so 0.40 separates two natural groups rather than cutting
+through a continuum. The RC04 diagnosis below independently reinforced the decision, by showing what
+happens when a looser rule admits an item that then dominates the result. Nothing in the live
+pipeline was changed by this check.
+
+Sensitivity to the other two discretionary parameters in this composite --- the 10\% Chow trim and
+the 2020--21 COVID exclusion window --- has not yet been run, and remains outstanding.
+
+\section{RC04 --- an alternative measure, and the diagnosis that rejected it}
+
+This check is recorded in full because its interim result was attractive and wrong, and the
+reasoning that rejected it is the substantive point.
+
+The baseline ``unexpected movement'' measure is an OLS residual across five domains, breaking in
+1985. The alternative --- a restricted slope\,$=1$ z-score gap, using all thirteen domains with no
+sign exclusion --- produced a composite with a quite different and initially appealing shape: a
+break in 2019 on a rising series, $F=23.61$.
+
+Item-level diagnosis found this was almost entirely one series. Poverty shifted by 2.31, roughly
+five times the next largest item, while six other domains moved in the opposite direction. A median
+composite, which is robust to a single dominating item, removes the rise altogether: the break moves
+to 2009, $F=8.93$, and \emph{both} segments decline.
+
+The check therefore did more than reject a candidate measure. It independently vindicated the
+sign-exclusion rule used in the main specification, which already screens out the one item that
+distorted the alternative. Closed 30 July 2026; full working in \texttt{RC04\_note.md}.
+
+\section{RC05 --- sensitivity of the policy-agenda and spending findings}
+
+The two series in the policy-instability section (Figure~2.11 and the spending-composition figure)
+each yield a concentration result and a change result. The concentration results are robust; the
+\emph{dates} attached to them are not, and neither is the change result. This section sets out what
+each finding does and does not survive, since that distinction is the whole of what can be claimed.
+
+\begin{threeparttable}
+\caption{Sensitivity of the policy-agenda and spending findings}
+\begin{tabular}{p{2.6cm} p{3.6cm} p{4.2cm} p{2.6cm}}
+\toprule
+Finding & Baseline & Alternative specification & Verdict \\
+\midrule
+Agenda concentration, break year & Full series from 1972: peak 1997, $F=25.84$, $p<0.0001$ &
+Restricted to 1979--2026, the book's window and the range the figure displays: $F=8.81$, $p=0.010$;
+from 1980, $F=6.39$, $p=0.051$ & \textbf{Window-sensitive} --- the 1979 window is used throughout,
+and the reported $F$ falls threefold \\
+Agenda concentration, coder & CAP human coding, 1979--2012: peak 1997, $F=8.15$, $p=0.018$ &
+This project's independent coding, same years: peak 1997, $F=6.35$, $p=0.059$ &
+\textbf{Survives} --- both coders locate the same year on matched data \\
+Agenda concentration, break date & Sweep peak 1992 & 90\% bootstrap interval 1987--2014, against an
+admissible window of 1984--2017; $F$ exceeds the critical value at every candidate year &
+\textbf{Not identified} --- no date is reported \\
+Agenda churn & CAP coding, 1979--2012: $+0.00276$/yr, $p=0.0056$ & This project's coding, same
+years: $+0.00135$/yr, $p=0.283$ & \textbf{Resolution effect}, see note \\
+Spending concentration & $-0.0230$/yr, $p<0.0001$ & Excluding 2020--22: $-0.0263$/yr, $p<0.0001$;
+CAP segment alone $-0.0562$, $p<0.0001$ & \textbf{Survives} --- but flat within the PESA segment
+alone ($p=0.26$), so the decline is concentrated pre-2005 \\
+Spending change & All years: $+0.0117$/yr, $p=0.675$ & Excluding 2020: $-0.0132$/yr, $p=0.548$;
+excluding 2020--22: $-0.0406$/yr, $p=0.024$ & \textbf{Sign depends on one observation} --- no claim
+of rising volatility is made \\
+Spending break year & Sweep peak 2018, $F=11.62$, $p=0.026$ & Excluding 2020 the peak moves to 1991
+and loses significance ($p=0.130$) & \textbf{Artefact of the pandemic year} \\
+Agenda concentration, unit density & 2019--26 reads denser by ratio than 2000--17 & Rarefied to a
+common 43 units: the gap widens (4.20 vs.\ 3.27 raw), $t=-7.67$, $p<0.0001$ &
+\textbf{Survives} --- not a segmentation artefact \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item \textbf{The agenda churn discrepancy is a resolution effect, not a disagreement.} Subsampling
+the human-coded series down to this project's unit counts reproduces this project's null almost
+exactly ($+0.00095$/yr; 8\% of 200 bootstrap draws significant, against 38\% at a constant 46 units
+and $p=0.0056$ unrarefied). The two codings agree on topics ($r=0.892$) and differ in how finely
+they cut, so the human-coded series is the better-resolved one and is the one the trend should be
+quoted from. This project's flat slope is a measurement limitation, not a competing estimate.
+\item \textbf{Both break dates are unidentified, and both underlying changes are real.} Where a
+structural-break test rejects a single-trend model at every candidate year, it is detecting a change
+of shape rather than locating an event. The concentration trends are significant at $p<0.001$ in
+both series and run in opposite directions --- the agenda broadens while spending concentrates.
+\item \textbf{The spending series is dominated by two observations}, 1990--91 and 2020--21, and in
+both cases by one function (Economic affairs, whose share falls 52\% then rises 95\%, and later rises
+128\% then falls 45\%). Read the series as a response to two recessions rather than as a general
+loosening of budgetary discipline.
+\item Full detail in \texttt{policy\_instability/agenda\_recode/METHOD.md} \S4t--\S5e and in the
+\texttt{diagnostics/} scripts, each of which regenerates the numbers above.
+\end{tablenotes}
+\end{threeparttable}
+
+\section{RC06 --- the single-break specification, and why the start date matters}
+
+The break tests throughout this chapter fit \emph{one} break. That specification is tested here
+against the two series in the policy-instability section, and it does not survive. Both series are
+curved rather than trending, both prefer more than one break on a formal criterion, and both give
+materially different answers depending on where the series is allowed to begin. None of this is a
+coding artefact --- it is what the data do.
+
+\subsection*{The series are U-shaped, not trending}
+
+Fitting a quadratic in place of a straight line raises $R^2$ from 0.255 to 0.487 for the government
+agenda ($F=18.52$, $p=0.0001$) and from 0.553 to 0.817 for spending composition ($F=62.32$,
+$p<0.00001$). Era means show the shape directly, and show that the 1980s are the high end of it
+rather than a quiet baseline:
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+& 1980s & 1990s & 2000s & 2010s-- \\
+\midrule
+Agenda (effective topics) & 11.95 & 10.23 & 11.98 & 13.80 \\
+Spending (effective functions) & 5.84 & 5.02 & 5.09 & 4.90 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The 1980s--1990s difference is significant in both series ($p=0.049$ and $p<0.0001$). The
+government agenda was as broad in the 1980s as in the 2000s; public spending was at its most
+dispersed. The mid-1990s are the trough of both, not the floor from which a rise begins.
+
+\subsection*{The data prefer more than one break}
+
+Selecting the number of breaks by BIC (\texttt{strucchange::breakpoints}, trend model, 15\% trim)
+returns \textbf{two} breaks for the agenda (1992 and 2003) and \textbf{four} for spending (1987,
+1996, 2007 and 2013). A single-break test applied to a series with two or four turning points is
+misspecified, and this explains a pattern reported elsewhere in these appendices: the $F$-curve
+never falls below its critical value, and the bootstrap interval for the break year spans almost the
+whole admissible window. A wandering series rejects the single-trend model at every candidate year,
+and the ``break'' it reports is wherever the best single split happens to land.
+
+\subsection*{The start date changes the finding}
+
+\begin{threeparttable}
+\caption{Trend in concentration by start year}
+\begin{tabular}{lrrrr}
+\toprule
+Series starts & \multicolumn{2}{c}{Government agenda} & \multicolumn{2}{c}{Public spending} \\
+& slope/yr & $p$ & slope/yr & $p$ \\
+\midrule
+1979 & $+0.0803$ & 0.0005 & $-0.0230$ & $<0.0001$ \\
+1990 & $+0.1688$ & $<0.0001$ & $-0.0045$ & 0.163 \\
+1997 & $+0.1545$ & 0.0001 & $+0.0012$ & 0.777 \\
+1999 & $+0.1529$ & 0.0006 & $-0.0014$ & 0.773 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item \textbf{This is the strongest single caution in these appendices.} The agenda series reaches
+its minimum in 1993; a start date shortly after it roughly doubles the apparent rate of broadening.
+The spending concentration result --- the largest $F$ statistic anywhere in this section --- is a
+phenomenon of 1979 to the late 1990s and \textbf{disappears entirely} from a 1997 start.
+\item A start year chosen for its historical tidiness can therefore manufacture one finding and
+erase another. 1997 is attractive as a baseline on institutional grounds and is, for these two
+series, close to the worst available choice on statistical ones: it sits just after the trough of
+one series and after the whole of the movement in the other.
+\item The window used throughout is 1979--2026 for the agenda and 1979--2024 for spending, chosen
+before these tests were run and retained because it is the book's frame, not because it is
+favourable. Readers should treat the \emph{shape} of both series as the finding and any single
+slope or break year as conditional on the window.
+\item Reproduced by \texttt{policy\_instability/diagnostics/eighties.R}.
+\end{tablenotes}
+\end{threeparttable}
+
+\section{RC07 --- the National Audit Office delivery-failure series}
+
+Figure~2.13 rests on a machine-coded reading of every National Audit Office value-for-money
+report, 1984--2025. The August 2026 re-code changed both the extract the coder reads and the
+severity scale it applies, and moved the finding materially. This section reports what moved,
+and plots every specification considered and rejected.
+
+\subsection*{Why the series was re-coded}
+
+The original extract took the first passage of continuous prose in each report. In National Audit
+Office reports that passage is scene-setting --- what the body does, how large the programme is ---
+and the verdict sits deeper. Hand-coding of eleven reports, blind to the machine's answer,
+established the cost: an expert reader could code only two of five reports from the original
+extract. Re-extracting from the report's own findings section lifted that to eight of eleven.
+The re-code raised the measured failure rate in every period after 1996 by seven to eight percentage
+points, and left the 1984--96 period essentially unchanged --- the defect was in modern reports,
+not old ones, because older reports carry a clean summary heading and newer ones do not.
+
+\subsection*{What is plotted, and what is not}
+
+The figure plots a \emph{count}: serious delivery failures identified per year, estimated from
+extracts carrying an explicit verdict and applied to all value-for-money reports published. The
+proportion measure --- the more intuitive quantity, and the one shown in earlier presentations of
+this work --- is not used, for the reason set out below.
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.98\textwidth]{robustness_chapters/figures_ch02/fig_a2_14_nao_specifications_not_chosen.png}
+\caption{National Audit Office delivery failure: the specifications not chosen. Panel A is the
+superseded series; B and C are proportion measures on the corrected extract; D restricts to failure
+attributed to the audited body's own decisions; E is the count without the verdict-bearing
+restriction; F is the extract coverage that disqualifies a raw count within that subset.}
+\label{fig:ch02naoalt}
+\end{figure}
+
+\subsection*{Publication volume: the confound that decided the measure}
+
+National Audit Office output rose to roughly 75 reports a year in 2005--13 and fell to about 57 in
+2014--25. The rise in the \emph{share} of reports finding serious failure coincides with that
+decline, and a referee's objection follows directly: publish fewer reports, more selectively, and
+the share rises without any change in government performance. The objection has force. Conditional
+on volume, the post-2015 excess in the proportion measure is not statistically significant
+(Poisson with a volume control and a year trend: $+0.203$, $p=0.258$), and adding volume as a
+regressor removes the break under Bai--Perron.
+
+The count measure is reported instead because it inverts the objection rather than evading it:
+from 2005--13 to 2014--25 the National Audit Office published about a quarter \emph{fewer} reports
+and identified about a third \emph{more} serious failures. That contrast requires no model. It does
+not dispose of the concern --- the Office may have changed what it chooses to audit, which these
+data cannot test --- and readers should treat the break year as conditional on that.
+
+\subsection*{Attribution: what cannot be claimed}
+
+The re-code coded, separately from severity, whether each failure lay within the audited body's own
+control. Externally-driven failure is far commoner in the recent period (21.3 per cent of
+2014--25 reports against 8.1, 10.2 and 9.3 per cent in the three earlier periods), and restricting to
+government-attributable failure cuts the rise by about a quarter.
+
+On that restricted series \textbf{no statistically significant break survives} ($p=0.34$;
+Bai--Perron selects zero breaks). The period contrast remains substantial --- 17.1 to 28.2 per cent
+--- but the annual series is too noisy for the test once the numerator is restricted. This is a
+limit on what may be claimed rather than evidence that nothing changed: \emph{a difference in period
+means} is supportable, \emph{a structural break in government-attributable failure} is not.
+
+\subsection*{Reproduction}
+
+Series and both figures: \texttt{nao\_extension/diagnostics/build\_fig214\_v3.R} and
+\texttt{build\_fig214\_robustness\_appendix.R}. Full method, including the coding prompts and the
+instrument defects found and fixed, in \texttt{nao\_extension/METHOD.md}.
+
+\section{RC08 --- the 1997--98 gap: recovery, and a substitute source rejected}
+
+Figure 2.13 was built with 1997 and 1998 absent. Both years are now present, on the same
+instrument as every other year. This section records how the gap arose, how it was closed, and
+--- because the route that failed is more informative than the one that worked --- what was
+tested and rejected along the way.
+
+\subsection*{Why the years were missing}
+
+The reports were never unpublished. The National Audit Office catalogues 41 reports for 1997 and
+39 for 1998 --- 40 and 38 of them value-for-money studies --- each with a live page on its current
+website. What failed was
+retrieval. Every such page hands the reader to the UK Government Web Archive, and two conditions
+must both hold before that archive returns a document rather than its own viewer page: the URL
+requires the \texttt{id\_} modifier immediately after the fourteen-digit timestamp, and the
+timestamp must be one under which the file was actually captured. The 2022 capture that the
+Office's own pages link to is empty for these files; the 2017 capture holds them. Requests that
+satisfy only the first condition return a 17.5KB HTML page which is easily mistaken for a short
+document.
+
+Applying both conditions recovered \textbf{69 of 69} outstanding reports as original PDFs --- 30 for
+1997 and 39 for 1998. With the reports already held, 1997 now has 40 coded value-for-money reports
+(21 carrying an explicit verdict) and 1998 has 39 (23). Both clear the inclusion thresholds of
+RC03 unchanged, on original documents, using the same prompts as the rest of the corpus. No
+substitute source enters the series and no caveat attaches to these two years on grounds of
+provenance.
+
+The corpus is not, however, on a single extractor, and an earlier version of this section wrongly
+implied that it was. Three text routes coexist and are recorded per row: the v3 findings
+extractor; a v2 first-prose fallback where no findings anchor could be located; and optical
+character recognition for reports digitised as images. Their extent is given below.
+
+\subsection*{A substitute source, tested and rejected}
+
+Before the recovery succeeded, the archived National Audit Office press notices were assessed as a
+replacement. They survive in quantity for both years (49 and 46), are written by the Office, and
+state the Comptroller and Auditor General's verdict in plain terms. They were rejected on evidence
+rather than principle, and the tests are reported here because the same reasoning governs any
+future use of a substitute instrument.
+
+\emph{Measurement.} For 297 reports the corpus holds both a press notice and the report itself.
+Coded with the identical prompt, the press notices returned a serious-failure rate of 0.141
+against 0.212 from the reports --- a deficit of 7.1 percentage points. Against an
+independent-samples two-standard-error band this is 6.2 points; because the two codings are
+\emph{paired} on the same 297 reports the appropriate band is 4.6, so the deficit is more clearly
+established than the independent-samples figure suggests. The disagreement is not symmetric noise: of 63 reports the full text codes as serious
+failure, the press notice agrees on 28 and records 30 as the milder category. The notices report
+the criticism but omit the quantified detail --- the percentage overrun, the share of a portfolio,
+the exact audit-opinion wording --- on which the severity threshold turns. A one-directional
+error of this kind does not cancel in a count.
+
+\emph{Correction attempted.} Because the fault is threshold placement rather than comprehension,
+a few-shot correction was tried, with exemplars drawn only from pairs excluded from the test set
+and a pass condition fixed in advance. It failed: the deficit closed from $-0.068$ to $-0.064$
+against a two-standard-error band of 0.063, and $\kappa$ fell from 0.363 to 0.337.
+
+\emph{Selection --- claimed, then withdrawn.} An earlier version of this section reported that
+reports receiving a press notice were more likely to be serious than those that did not, and drew
+on that to argue that measurement and selection biases ran in opposite directions. \textbf{That
+statistic has been withdrawn.} Its comparison group was constructed by title matching, and for
+1999--2008 the corpus holds 588 value-for-money reports against 561 archived notices: at most a
+few dozen reports can genuinely lack a notice, yet the ``without'' group contained several
+hundred. It was therefore composed overwhelmingly of matching failures rather than of reports
+without a notice --- and since matching succeeds more readily on distinctive, prominent titles,
+and prominent reports are likelier to be serious, the estimate was biased in the direction claimed
+by construction. A selection effect may well exist; this analysis did not measure it, and would
+need matching on report number rather than title. The measurement finding above stands on its own
+and is sufficient to reject the substitute.
+
+\emph{Human check.} Ten press notices drawn at random from 1997--98 were coded by hand, blind to
+the model's codes, which were sealed in advance. Agreement was 6 of 10 --- reported here as a
+qualitative check and not as a reliability coefficient, since at that sample size the interval is
+too wide to support one. The two disagreements at the severe end were interpretable rather than
+random: one was the qualified-audit-opinion trigger applied literally to a qualification affecting
+one of five accounts, the other an attribution question where Community-wide losses were assigned
+to a United Kingdom body. Both are recorded in the coding notes.
+
+\subsection*{An inclusion threshold briefly relaxed, and restored}
+
+While the years were still short of documents, the inclusion thresholds were lowered from 15
+reports and 10 verdict-bearing extracts to 13 and 6. The change was applied to every year rather
+than to 1997 alone --- it also admitted 1987, 1988 and 1999 --- and it left the break at 2015,
+moving the sup-$F$ from 17.06 to 15.23. It has been \textbf{reverted}. It was a response to
+missing documents, and the documents are no longer missing; the thresholds of RC03 now apply
+unchanged throughout. It is recorded here because a threshold moved to admit a wanted year is a
+specification chosen to obtain a result, and the reader is entitled to know that the possibility
+arose and was closed.
+
+\subsection*{What the completed series shows}
+
+On 41 years the break remains \textbf{2015}, with sup-$F$ 16.13 and a permutation
+$p$ of 0.0002. Leave-one-out returns 2015 in 40 of 41 runs, and Bai--Perron
+continues to select a single break at 2015. Period means are 7.3, 14.9, 17.6 and 24.1
+serious failures a year across 1984--96, 1997--2004, 2005--13 and 2014--25 --- a rise of
+3.29 times from the first period to the last.
+
+The volume qualification of RC07 survives the completed series and should continue to be stated:
+conditional on publication volume and a linear time trend, the post-2015 excess is not
+statistically significant ($+0.165$, $p=0.315$). That qualification is, however,
+\textbf{specification-sensitive}. Removing the time trend while retaining the volume control makes
+the post-2015 term significant ($+0.632$, $p<0.001$). This
+is not a robustness gain: without a trend the indicator absorbs the general upward drift of the
+series. Both specifications are printed by the supporting script so that the sensitivity is
+visible rather than resting on which one happened to be run.
+
+\subsection*{Coverage across the rest of the series}
+
+Because the gap was caused by a retrieval fault rather than by absent documents, every year was
+audited against the Office's own catalogue. Coverage runs at 96--100 per cent for 1984--99. The
+apparent shortfall in later years is accounted for by document type rather than by missing
+reports: the catalogue also contains financial audit certificates, impact case studies and the
+Public Service Agreement data-system reviews, none of which is a value-for-money report and none
+of which enters the corpus.
+
+\subsection*{Reproduction}
+
+Recovery and coding: \texttt{nao\_extension/pdf\_era/code\_ukgwa\_recovered.py}. Substitute-source
+tests: \texttt{calibrate\_press\_notices.py}, \texttt{tune\_press\_notice\_coder.py} and
+\texttt{selection\_test\_9798.py}, with the hand codes in \texttt{handcode\_pj.csv} against the
+sealed model codes in \texttt{handcode\_model\_codes\_SEALED.csv}. Supporting tests:
+\texttt{diagnostics/fig214\_supporting\_tests.R}. Series thresholds and their history:
+\texttt{pdf\_era/rebuild\_series.py}. Full narrative, including three superseded accounts of the
+gap and their disproof, in \texttt{nao\_extension/METHOD.md}.
+
+\subsection*{Where the break falls, by specification}
+
+The break date is the interpretive claim this section rests on, so it is worth setting out how it
+behaves under every alternative tried. Table~\ref{tab:ch02naobreaks} does that. The point is not
+that each specification reaches significance --- two do not --- but that they agree on the year,
+including the superseded extract used for the conference presentation that preceded this work.
+
+\input{robustness_chapters/ch02_nao_breaks_GENERATED}
+
+\subsection*{Provenance of the text: three extraction routes, not one}
+
+An independent audit of this chapter's pipeline on 10 August 2026 established that the corpus is
+not on a single extractor, and that earlier text here implied otherwise. The position, per row and
+recorded in the data:
+
+\begin{itemize}
+\item \textbf{354 of 2188 coded reports (16.2 per cent)} carry a \emph{v2 first-prose
+fallback} extract, used where no findings anchor could be located. This is the very text the v3
+re-code was built to replace, and its incidence is strongly non-stationary --- far commoner in
+2000--07 than later. Dropping every fallback row leaves the break year and the direction of the
+finding unchanged, and slightly \emph{increases} the measured rise, so the concern that the middle
+period is artificially depressed does not hold. The inconsistency is real and is reported here
+rather than left implicit.
+\item \textbf{47 reports} were read by optical character recognition (Apple Vision), almost all
+1984--88, because they were digitised as page images with no text layer. They went through the
+same anchor rules and the same prompts. In 1984--95 these rows are coded a serious failure
+8.5 per cent of the time against 15.2 per cent for native-text rows --- a difference of
+-6.6 points against a two-standard-error band of 9.0, so not statistically distinguishable, on
+near-identical sufficiency rates (70.2 against 70.2 per cent). An open question, not a finding.
+\item \textbf{Eighteen reports} (1999) were re-extracted with a strengthened guard against
+contents-page matches. The guard changed one of the eighteen.
+\end{itemize}
+
+A single re-extraction of the whole corpus under one set of rules would remove this untidiness.
+It has not been done, and the reader is entitled to know that before weighing the series.
+
+\section{RC09 --- Does the rise reflect government performance, or how the Office writes?}
+
+This is the most serious objection to Figure 2.13, and unlike the others it is internal to the
+instrument rather than to the data. It was raised by the author and is tested here directly.
+
+\subsection*{The objection}
+
+The severity scale's threshold for a serious failure is quantified: a cost overrun of roughly
+half or more, a majority of a portfolio failing, a qualified audit opinion. A coder can only
+apply those triggers to text that states them. RC08 established that this matters --- of 63
+reports whose full text codes as a serious failure, a shorter summary version of the same report
+agreed on only 28, recording 30 as the milder category, because the summary omitted the
+quantified detail rather than the criticism. If National Audit Office reports have become more
+quantified across forty years, the coder would record more serious failures without anything
+changing in government performance, and the trend in Figure 2.13 would be an artefact of house
+style.
+
+\subsection*{The test}
+
+A stratified sample of 416 coded reports (about 110 per period) was re-extracted and the text
+measured directly: digit density, explicit percentage mentions, over-run and majority language,
+and the verdict vocabulary the scale keys on. Currency mentions were computed and then
+\emph{discarded}: the pound sign does not survive text extraction from the older and
+image-scanned reports, so the measure was zero for every report before 1997 --- an artefact of
+extraction, not an absence of money in the text, and retaining it would have biased the control.
+
+Quantification does rise, though not smoothly. Mean digit density runs 0.0181 in 1984--96,
+0.0154 in 1997--2004, 0.0132 in 2005--13 and 0.0264 in 2014--25; explicit percentage mentions run
+1.15, 1.60, 1.19 and 3.18. The increase is concentrated in the most recent period rather than
+accumulating steadily.
+
+\subsection*{The result}
+
+\textbf{The mechanism is real.} Digit density is a strong and highly significant predictor of a
+report being coded a serious failure (+46.2 in log-odds, $p=0.0002$). Reports containing more
+numbers are more likely to be recorded as serious, holding the period constant.
+
+\textbf{The trend survives it.} In a logistic model of serious failure on year alone, the
+coefficient is +0.439 per decade ($p=0.0003$). Adding digit density, quantification language, verdict
+vocabulary and an indicator for whether the extract carried an explicit verdict reduces it to
++0.284 ($p=0.0262$) --- an attenuation of about 35 per cent, with the trend still significant.
+
+\textbf{But the adjusted shape is not the unadjusted shape.} Replacing the linear year term with
+period indicators, every period after 1984--96 sits above it --- 1997--2004 +1.13 ($p=0.0096$),
+2005--13 +0.81 ($p=0.0581$), 2014--25 +1.03 ($p=0.0124$) --- but the three later periods are not
+distinguishable from one another, and the ordering is not monotonic. Once quantification is
+controlled, the pattern reads more like a step change after the mid-1990s that then plateaus
+than like a steadily compounding rise.
+
+\subsection*{What may be claimed}
+
+That roughly a third of the measured rise is attributable to reports becoming more quantified,
+and that the remainder is not. The defensible formulation is a substantial increase in serious
+delivery failures identified, of which about a third reflects changes in how the Office writes
+rather than in what it found.
+
+Three limits belong with that. The sample is 416 reports, not the full corpus. Digit density is a
+crude proxy for quantification and is collinear with the other text measures, so the individual
+coefficients should not be read separately. And the period-indicator result sits awkwardly beside
+a break dated 2015: the break test is computed on the annual count series, this model on
+individual reports with different controls, so they are not in contradiction --- but a reader
+will notice, and the tension is better acknowledged than left implicit.
+
+\subsection*{Reproduction}
+
+\texttt{nao\_extension/pdf\_era/text\_features\_sample.py} draws the sample and measures the
+text; the models are estimated in
+\texttt{nao\_extension/diagnostics/fig214\_supporting\_tests.R}, which writes every figure quoted
+above to \texttt{diagnostics/fig214\_computed\_values.csv}.
+
+\input{robustness_chapters/ch02_nao_quantification_GENERATED}
+
+\section{RC10 --- government U-turns: three alternative specifications}
+
+Figure 2.15 counts U-turns per year from \emph{The Annual Register}, 1979--2025. The headline
+measure is a raw annual count of commitments reversed by the government that made them, dated to
+the government decision that reversed them. This check reports three alternative specifications.
+One of them reverses the direction of the finding, and the reason it must not be adopted is the
+substance of this section.
+
+\input{robustness_chapters/ch02_uturns_cuts_GENERATED}
+
+\subsection*{Per 100,000 characters: the finding MOVES}
+
+The \emph{Annual Register} printed 127,637 characters a year on average in 1979--89 against 55,993
+in 2010--19, a reduction of 2.2 times. Dividing the annual count by chapter length reverses the
+early--late comparison: the Thatcher years fall from 5.08 to 3.94 events and the Cameron years rise
+from 3.00 to 5.46, so on the normalised measure the later period is the higher one.
+
+The raw count was chosen as the headline before any series had been computed, on the ground that
+chapter length is a publisher's page budget rather than a measure of political event-space, and
+that the denominator carries its own structural break --- flat to 1999, then two steps down.
+Normalising by it would impose the inverse of an editorial decision on the series, and a break test
+computed on the normalised measure would partly be detecting when the Register's page allocation
+was cut. That argument is unchanged by the direction in which the normalised series happens to run.
+
+Both series are reported. They agree that the period from 2017 is elevated; they disagree about
+whether the 1980s and 1990s were also high. That is the boundary between what this measure supports
+and what it does not.
+
+\subsection*{High confidence only: the finding REVERSES, and the specification is inadmissible}
+
+Restricting to events the coder recorded as high confidence produces a rising series --- 0.75 events
+a year under Thatcher against 3.33 from 2017 --- which matches the expectation registered before the
+series existed.
+
+It should not be used. The second table shows why: 83 per cent of events dated before 1997 are coded
+low or medium confidence, against 56 per cent of those from 1997 onwards, and 44 per cent of late
+events were settled on a single confident judging pass against 17 per cent of early ones. Confidence
+is therefore era-dependent by construction. The coder is less certain about 1985 than about 2021
+because less is recorded and less is knowable about the earlier cases, not because the earlier events
+are worse established as U-turns. Filtering on confidence removes early events \emph{because they are
+early}. Using an era-dependent filter to adjudicate an era comparison is circular, and it would
+deliver the expected answer by the one route incapable of supporting it.
+
+The specification is reported here rather than omitted. A reader who reconstructs it from the
+replication data will find it, and an unexplained omission is worse than a documented rejection.
+
+\subsection*{Narrow testability only: the finding SURVIVES}
+
+The \texttt{testability} flag records whether the reversed commitment was narrowly or broadly
+specified. It differs by 8 percentage points between the two halves of the window, against 26 points
+for confidence, so it is not contaminated in the same way. Restricting to narrowly specified
+commitments retains 184 of 221 events and preserves the direction of the headline series: 4.00 events
+a year under Thatcher and 5.67 under Major, against 2.69 and 2.71 in the Blair--Brown and Cameron
+periods, rising to 5.33 from 2017.
+
+\subsection*{What the flag table shows in its own right}
+
+The mechanical flags --- stage-one duplication, unmatchable short quotes, re-quoting --- run at
+0--3 per cent and are flat across the window. The pipeline is not era-biased. The flags that do skew
+all record the coder's own uncertainty: confidence, judging passes, breadth of the commitment, and
+whether a reversal date could be determined at all. The early record is harder to code, and the
+instrument records that it is.
+
+\subsection*{Reproduction}
+
+\texttt{policy\_instability/uturns/}\allowbreak\texttt{gen\_rc09\_table.py} generates both tables above from
+\texttt{coding/uturns\_deduped.csv}; \texttt{build\_fig\_2\_16.R} draws the figure from
+\texttt{series/uturns\_series.csv}. The deduplication that produces the 221 events from 250 coded
+rows is documented in \texttt{DEDUPLICATION\_RULE.md} and logged case by case in
+\texttt{coding/DEDUPE\_LOG.csv}; every post-coding intervention is recorded in
+\texttt{POST\_INSTRUMENT\_LOG.md}.
+
+\section{RC11 --- the shape of the turbulence index, and the specifications not chosen}
+
+Figure 2.16 fits a \emph{segmented} model: the index is flat, then bends upward. Every alternative
+shape considered is recorded here, with the criteria that chose between them. The question was put
+directly --- does the break apparatus used elsewhere in this chapter assume a stepped form that the
+data do not support? --- and it was settled on a criterion rather than by argument.
+
+\subsection*{Six shapes, four criteria}
+
+All six models were fitted to the same series (canonical PC1, $n=47$), in the same estimator family.
+Parameter counts include the residual variance \emph{and} any searched break date or knot, and BIC
+is computed identically for all six as $n\log(\mathrm{RSS}/n)+k\log n$, so the numbers are
+comparable. The leave-one-out criterion re-searches the break date or knot \emph{inside each fold},
+charging the flexible models honestly for their search; it is the one criterion that does not rest
+on a parameter-counting convention.
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+Model & $k$ & BIC & $\Delta$BIC & LOO-CV RMSE & AR(1) BIC \\
+\midrule
+Spline (thin-plate, edf 8.33) & 9.33 & 8.00 & \textbf{0.00} & 0.921 & --- \\
+Break (level$+$trend, 2015) & 6 & 22.74 & 14.74 & 1.097 & 150.17 \\
+\textbf{Segmented (bend, knot 2012)} & 5 & 22.93 & 14.92 & 1.502 & \textbf{148.86} \\
+Quadratic & 4 & 23.37 & 15.37 & 1.161 & 149.31 \\
+Linear trend & 3 & 41.11 & \textbf{33.11} & 1.443 & 153.95 \\
+Flat (no trend) & 2 & 43.35 & \textbf{35.35} & 1.493 & 150.69 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two results, of different strength. \textbf{Flat and linear are decisively rejected} --- $\Delta$BIC
+27.4 and 16.8, where a difference above 10 is conventionally decisive, and the ordering is the same
+on all four criteria. \textbf{Break, spline and segmented are indistinguishable} --- $\Delta$BIC
+0.00, 0.40 and 0.71, all inside the band within which no preference can be claimed. The data
+require a late shift and are silent on whether it is a jump, a bend or a smooth curve.
+
+\subsection*{The shape, stated plainly}
+
+The segmented fit puts the slope at $-0.0002$ per year before 2013 and $+0.355$ per year after; the
+break fit puts it at $-0.004$ before 2015 with a level jump of $+2.16$. \textbf{There is no gradual
+rise.} The pre-shift slope is not merely small, it is indistinguishable from zero in both
+interpretable fits. A straight line fitted to the whole series returns a highly significant trend
+($t=4.03$, $p<0.0001$), and that statistic is arithmetically correct while describing a shape the
+series does not have; it should not be quoted without the shape beside it.
+
+\subsection*{Three controls}
+
+\textbf{Not an artefact of the PCA weights.} PC1's loadings are estimated on the full sample, which
+can manufacture late structure. The unweighted mean of the six $z$-scores, with no estimated weights
+at all, correlates $r=0.989$ with PC1 and returns the same verdict: linear 11.24 worse and flat
+25.85 worse than the leading models, with a segmented knot at 2012.
+
+\textbf{All six components participate.} Mean $z$ before and after 2013: rebellions $+1.245$,
+dislocation $+1.182$, electoral volatility $+1.095$, PM churn $+0.577$, departmental churn $+0.500$,
+U-turns $+0.277$. Six of six move upward. The components are correlated, so this is description
+rather than an independent sign test, but it establishes that the shift is not one or two series
+dragging an index.
+
+\textbf{The step does not survive the end date.} Ending the series in 2019, before the pandemic,
+reverses the ordering: spline 0.00, segmented 2.98, break 4.87, quadratic 8.79, flat 10.50, linear
+10.71, with the knot at 2013. Flat and linear remain rejected; the smooth alternatives now beat the
+step. The existence of the late shift is robust to the end date. The claim that it is a
+discontinuity is not.
+
+\subsection*{The components do not individually support breaks}
+
+Running the same selection exercise on each component separately, only one of six prefers a break
+model. Departmental churn prefers a plain linear trend ($\Delta$BIC 6.51 against the break),
+consistent with its Poisson sup-LR result of $p=0.10$; PM churn and U-turns prefer \emph{flat};
+electoral volatility and rebellions prefer a spline, and rebellions rejects a break by $\Delta$BIC
+31.75. Only parliamentary dislocation prefers one. This is consistent with the previous control
+rather than against it: individual annual series are too noisy to locate a shift, while all six
+lean the same way, so aggregation recovers a signal none of them shows alone. It does mean that
+\textbf{the shift belongs to the index and not to its parts}, and that break dates should not be
+claimed for individual component series on this evidence.
+
+\subsection*{Where the turn falls, and how firmly}
+
+A block bootstrap (1{,}000 draws, block length 4) puts the knot's 90\% interval at
+\textbf{2007--2017}, with a median of 2013 and only 20.1 per cent of draws on the modal year;
+$P(\text{knot} \in 2011\text{--}2015) = 0.705$. Leaving out each component in turn moves the knot to
+2012, 2012, 2013, 2013 and 2014 --- except electoral volatility, whose removal moves it to
+\textbf{2004} and roughly halves the post-shift slope. \textbf{The existence of the shift rests on
+all six components; its date rests disproportionately on one.} The main text therefore dates the
+turn as a range in the early-to-mid 2010s and Figure 2.16 draws it as a band rather than a line.
+
+\subsection*{Relation to RC06}
+
+RC06 shows that a single-break test applied to a curved series returns a break wherever the best
+split happens to land, with a bootstrap interval spanning almost the whole window --- and warns that
+a wide interval is a symptom of misspecification. The turbulence index has a wide interval, so the
+warning applies and was tested here. The outcome differs: for this series the wide interval reflects
+uncertainty about \emph{when}, not evidence against a shift, because the flat and linear models are
+rejected outright and three different late-shift shapes all fit. The lesson RC06 draws --- treat the
+shape as the finding and any single break year as conditional --- is adopted here in full.
+
+\subsection*{Reproduction}
+
+\texttt{nonlinear\_modelling/horse\_race.R} runs the six-model comparison and the per-component
+races; \texttt{control\_equal\_weight.R} runs the equal-weight and end-date controls;
+\texttt{knot\_robustness.R} runs the leave-one-out and bootstrap on the knot;
+\texttt{shape.R} reports the fitted slopes. All are local R, seed 42, and write to
+\texttt{nonlinear\_modelling/}. The reasoning and the result are recorded in
+\texttt{NONLINEAR\_MODEL\_SELECTION.md}, including the fact that the exercise \textbf{overturned the
+expectation it was set up to test}: a smooth trend was argued for in advance and the criteria
+rejected it.
+
+\section{RC12 --- the volatility curse, and four claims tested and not found}
+
+Chapter 1 names Campello and Zucco's volatility curse as the mechanism that would carry the book's
+argument from measurement to consequence: where outcomes are driven by forces beyond a government's
+control, voters reward and punish incumbents for conditions they did not create, and elections stop
+transmitting a democratic signal. If that mechanism operates in Britain, the chapter's own data
+should show it. This section reports the test, which is direct, and the result, which is that the
+mechanism is not found. Four further claims a reader might expect the chapter to make were tested
+in the same exercise and none of them survived either.
+
+\subsection*{Where the instrument comes from}
+
+Figure 2.9 already fits, for each item on the public agenda, a model of public worry on the
+real-world condition that item names --- worry about inflation on the inflation rate, worry about
+unemployment on the unemployment rate, and so on. \textbf{The fit of that model is the strength of
+the attribution link}: how closely public concern tracks the world. Nothing further needs to be
+built. If the volatility curse is operating, that tracking should weaken over the window. Eleven
+items have at least thirty usable years. The test uses no data from Chapters 3 to 9, so it cannot
+contaminate the suspects.
+
+\subsection*{The result depends entirely on which measure is used}
+
+\input{robustness_chapters/ch02_attribution_GENERATED}
+
+On $R^2$ the curse appears to be confirmed. Mean $R^2$ falls from 0.536 before 2000 to 0.402 after
+2015, it falls in seven of the nine testable items, and the pooled rolling $R^2$ declines steeply
+across the window ($\rho=-0.730$, $p<0.0001$). Reported alone, that is a publishable finding.
+
+\textbf{It does not survive the obvious check.} $R^2$ measures the \emph{proportion} of variance
+explained, so it falls mechanically whenever the condition being tracked stops varying --- even if
+the public tracks that condition exactly as well as before. This is range restriction, and it is not
+a decay of attribution. The measure that is immune to it is the slope, scaled by a yardstick held
+constant across eras. On the standardised slope the mean does not fall at all (0.905 to 0.950), the
+median falls slightly (0.896 to 0.818), the count of declining items drops from seven to six, and
+the paired test returns $p=0.65$. \textbf{On the measure that range restriction cannot fake, the
+decay is absent.}
+
+\subsection*{The middle era is the anomaly, not the present}
+
+The three-era columns show the shape the two-era comparison hides. Mean $R^2$ runs 0.536, 0.356,
+0.402: a dip and a partial recovery, not a decline. Inflation is the clearest case. Its $R^2$
+collapses from 0.904 before 2000 to 0.064 in 2000--14 and returns to 0.797 after 2015, and the
+standard deviation of inflation itself over those eras is 4.14, 1.36 and 3.35. \textbf{The collapse
+is the Great Moderation.} There was almost no inflation to attribute, so the fit vanished; when
+inflation returned after 2015, attribution returned with it, close to its 1980s strength. Trade
+unions follow the same pattern for the same reason.
+
+\textbf{The explanation does not extend to every item, and should not be claimed to.} Pensions shows
+the same V ($R^2$ 0.726, 0.062, 0.553) but its condition was \emph{most} variable in the middle era,
+not least (standard deviations 1.08, 3.38, 1.50), so range restriction cannot be what produced its
+dip. The common finding across items is the V-shape and the absence of a monotone decline; the
+range-restriction account explains why the V occurs in two of the three cases examined, and the
+third is unexplained.
+
+\subsection*{Attribution does not move with the index}
+
+If turbulence severs the accountability link, the two should move together. The pooled rolling $R^2$
+and the turbulence index correlate at $r=-0.274$, Spearman $\rho=-0.192$, $p=0.29$ over 32 years.
+The sign is the predicted one and the magnitude is not distinguishable from zero. Even had the decay
+been real, it does not track turbulence year to year.
+
+\subsection*{The output half fails on the same pattern}
+
+The curse has a second limb: if the accountability link is severed, the discipline on government
+weakens and delivery gets worse. The National Audit Office series is the chapter's only output
+measure, and the second table above regresses it on lagged attribution. Every naive coefficient is
+large, correctly signed and highly significant. \textbf{Every one of them dies when a linear trend is
+added}, and at lag 1 the sign flips. The raw correlation is $r=-0.659$; detrended it is $r=-0.158$.
+One specification of nine survives at the ten per cent level. Nothing may be built on it.
+
+\subsection*{No early warning}
+
+A system approaching a critical transition is expected to show rising variance and rising
+autocorrelation beforehand --- critical slowing down. On eleven-year rolling windows of the
+detrended index, variance does not rise ($\rho=-0.10$, $p=0.56$) and autocorrelation does not rise
+($\rho=+0.12$, $p=0.46$). The result is unchanged on windows of eight, ten and fifteen years and on
+the raw as well as the detrended series. \textbf{The turn of the mid-2010s was not announced in
+advance by the statistical signature of an approaching tipping point}, and tipping-point language
+should not be used of it.
+
+\subsection*{The pattern across all five tests is itself the finding}
+
+Five causal claims have now been tested on these data: attribution decay, attribution against the
+index, attribution to delivery failure, turbulence to delivery failure, and critical slowing down.
+\textbf{In four of the five the naive result is strong, correctly signed and significant, and in
+every one of those four it is entirely accounted for by common trend.} Four decades of British
+political series trend together, and a naive analysis of almost any pair of them will produce a
+mechanism that looks publishable and is not there. Given how much commentary about British political
+decline rests on exactly such pairings, this is worth reporting as a result rather than buried as a
+failure.
+
+\subsection*{What the chapter may still claim, and what it may not}
+
+\textbf{The chapter may not claim that the accountability link has decayed.} Its own data will not
+carry it, and the check that overturns it is one a competent referee will run in an afternoon.
+\textbf{It may report the volatility curse as a mechanism tested directly and not found} --- which
+is a contribution, since the mechanism is routinely asserted of Britain and, so far as we are aware,
+has not previously been tested on four decades of British agenda data.
+
+\textbf{One consequence must be stated plainly.} The literature audit identified the volatility
+curse as the argument that rescues the composite from the objection that it measures turbulence in
+the machinery of government rather than democratic decline. That bridge does not survive testing, so
+\textbf{the construct-validity question is left open, and the honest framing is the narrow one}: the
+index measures turbulence in the machinery of government, its rise after the mid-2010s is large and
+robust, and whether that constitutes democratic decline is a question the measurement cannot settle.
+
+\textbf{Against the five nulls, one positive finding.} Mean pairwise correlation between the six
+component dimensions falls from $+0.445$ in 1979--89 to $+0.042$ in 2015--25 ($\rho=-0.434$,
+$p=0.007$). The dimensions are becoming \emph{more} independent over time, not less, so whatever is
+happening is not contagion between them. This supports a \textbf{formative} reading of the index ---
+the six things constitute turbulence rather than reflecting a common latent cause --- and it is also
+the answer to the natural objection that PC1 explains only 36.4 per cent of the variance. On a
+formative index that figure is not a defect to be minimised; a reflective index of six measures of
+one underlying thing would be expected to do considerably better, and the fact that this one does
+not is evidence about what kind of object it is.
+
+\subsection*{Reproduction}
+
+\texttt{attribution\_test/rc12\_nulls.R} runs all five tests reported here and writes this section's
+tables; \texttt{attribution\_test/run\_attribution.R} runs the original $R^2$ and rolling-window
+analysis; \texttt{nonlinear\_modelling/turbulence\_to\_failure.R} runs the turbulence-to-failure
+test. All are local R, seed 42, no external calls. Outputs are written to
+\texttt{attribution\_test/} as \texttt{RC12\_NULLS\_RESULTS.txt} and five CSVs. The reasoning,
+including the numbers that an earlier unscripted run reported and that this script does not
+reproduce, is recorded in \texttt{attribution\_test/ATTRIBUTION\_NOTES.md}.

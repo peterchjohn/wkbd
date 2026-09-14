@@ -1,0 +1,272 @@
+% Appendix A, Chapter 3 — robustness checks. First entries added 11 Sep 2026 (PJ: "why not get
+% going on these 3.4 and 3.5" — a robustness pass on Ch3's own coding decisions). Content mirrors
+% data_workspace_2026-07/ch3_pipeline_restored/scripts/67_mp_misconduct_robustness.R and
+% 68_ministerial_departures_robustness.R, and the online_appendix/ch3_fig34_*.csv /
+% ch3_fig35_*.csv outputs those scripts write. Regenerate/extend as further checks are run.
+%
+% RC17 UPDATED 14 Sep 2026: Figure 3.7's mediation model was respecified from contemporaneous to
+% a sequential lag (Prof(t-2)->Trust(t-1)->Turbulence(t)) after PJ caught the mismatch between a
+% mediation claim and same-year measurement. Redoing the detrending/first-differencing checks
+% under the new lag structure surfaced a genuinely different result for first-differencing (a
+% significant NEGATIVE relationship, not the old null) — checked for fragility (influential-year
+% and HAC-lag sensitivity) before being written up, per the standing "diagnose, don't hide" rule.
+% This table's caption is now referenced as \label{tab:ch03robustness} (= Table A3.1) from the
+% chapter's own footnote 22, which previously had no cross-reference target.
+
+\section{Summary of checks run}
+
+\begin{threeparttable}
+\caption{Robustness checks, Chapter Three}
+\label{tab:ch03robustness}
+\begin{tabular}{p{1.1cm} p{3.5cm} p{4.3cm} p{3.6cm}}
+\toprule
+Check & Baseline & Alternative specification & Verdict \\
+\midrule
+RC13 & Figure 3.4 misconduct series: Mortimore \& Blick ``Seats Forfeited'' list, $N=8$ events
+(2009--2022) & Cross-checked against HC Library SN04594; two genuine events the source list missed
+(Onasanya 2019, Amesbury 2025) verified independently and added &
+\textbf{Corrected, not a robustness variant} --- $N$: 8 $\rightarrow$ 10; both new events fall
+2009+, reinforcing rather than disrupting the ``zero events 1979--2008'' pattern \\
+RC14 & Figure 3.5 reshuffle-cluster threshold: 5+ same-day appointment-endings & 3+ and 10+
+thresholds & \textbf{Survives} --- standalone rate rises across 1979--2025 at all three
+thresholds; only the level shifts (274 vs 216 vs 340 events, 47yr total) \\
+RC15 & Figure 3.5 classification windows: 14-day lateral-move window, $\pm$3-day
+government-ended window & 7-day and 30-day lateral windows; $\pm$7-day government-ended window &
+\textbf{Survives} --- 47-year standalone total ranges 269--280 (baseline 274) across all four
+specs; period-rate trend shape unchanged \\
+RC16 & Figure 3.5 Panel C (financial scandal), $N=12$ events, no detectable break (Chow $p=0.235$,
+Poisson LR $p=0.124$, both peak 1993) & Two borderline cases (Fox 2011, Siddiq 2025) added
+($N=14$); plus exact small-sample tests (Poisson rate-ratio, Fisher's exact) at a pre-specified
+split (2008) vs the searched peak (1993) & \textbf{Survives, and clarifies a look-elsewhere trap}
+--- null holds with or without the 2 borderline cases; the pre-specified 2008 split is null by
+every test ($p\geq0.46$), while the searched 1993 split looks significant \emph{only} if tested
+naively without correcting for the search ($p=0.02$--$0.04$) --- see below \\
+RC17 & Figure 3.7 mediation (sequential lag: Prof$_{t-2}\to$Trust$_{t-1}\to$Turbulence$_t$,
+$N=45$): quadratic direct effect of professionalisation on turbulence significant ($p=0.0001$),
+indirect effect via trust null ($p=0.875$) & Linear + quadratic calendar-time trend added to all
+three equations; separately, a first-differenced (change-on-change) specification preserving the
+same lag structure & \textbf{Mixed --- levels and change-on-change results diverge}: the direct
+effect is not distinguishable from a shared secular time trend in levels ($p=0.395$
+trend-adjusted, HAC $p=0.450$), matching the earlier finding; but first-differencing now finds a
+significant \emph{negative} relationship instead of nothing ($p=0.034$ HAC direct effect; $p=0.050$
+HAC total effect) --- opposite in sign to the positive levels relationship, and confirmed not to
+be an artefact of any single influential year or the HAC lag choice (see below) \\
+RC18 & Combined bad-behaviour count (Commons + Lords + local government, $N=44$ events,
+1979--2025) linked to professionalisation PC1 and to the Ch2 turbulence PC1, three directions
+tested: Poisson(scandal $\sim$ prof), OLS(prof $\sim$ scandal), OLS(turbulence $\sim$ scandal), all
+significant at baseline ($p<0.0001$, $p<0.0001$, $p=0.007$--$0.017$ by lag respectively) &
+Linear+quadratic calendar-time control and first-differencing, applied to all three directions;
+quadratic/GAM non-linearity check on each & \textbf{Two directions do not survive at all; the
+third (scandal $\to$ turbulence) is more real but still not causal-grade} --- professionalisation
+$\leftrightarrow$ scandal is killed by both year-control ($p=0.66$--$0.81$) and first-differencing
+($p=0.70$--$0.78$) in both directions, and is confirmed linear (GAM edf$=1.00$ both directions, no
+curvature at all). Scandal $\to$ turbulence weakens under year-control ($p=0.19$--$0.24$, not
+fully dead) but still collapses under first-differencing ($p=0.87$--$0.97$); its apparent curvature
+(quadratic term $p=0.05$, GAM $p=0.02$--$0.03$ across lags) also fails to survive year-control
+($p=0.13$--$0.15$) \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Full detail and re-runnable scripts: \texttt{data\_workspace\_2026-07/ch3\_pipeline\_
+restored/scripts/67\_mp\_misconduct\_robustness.R} (RC13), \texttt{68\_ministerial\_departures\_
+robustness.R} (RC14--16), \texttt{41p\_mediation\_quadratic\_lagged.R}, \texttt{51b\_mediation\_
+time\_trend\_lagged.R}, and \texttt{51c\_mediation\_firstdiff\_diagnostics.R} (RC17),
+\texttt{72\_combined\_scandals\_vs\_professionalisation.R} (RC18). Outputs:
+\texttt{online\_appendix/ch3\_fig34\_misconduct\_robustness.csv},
+\texttt{ch3\_fig35\_threshold\_robustness.csv}, \texttt{ch3\_fig35\_window\_robustness.csv},
+\texttt{ch3\_fig35\_scandal\_borderline\_robustness.csv}, \texttt{ch3\_fig35\_scandal\_exact\_
+tests.csv}, \texttt{ch3\_fig36\_mediation\_trend\_robustness.csv} (superseded by
+\texttt{data\_workspace\_2026-07/ch3\_pipeline\_restored/data/processed/ch3\_mediation\_time\_
+trend\_results\_LAGGED.csv}).
+\end{tablenotes}
+\end{threeparttable}
+
+\section{RC13 --- a source cross-check that became a correction}
+
+Figure 3.4 (MPs losing their seat over misconduct) uses Mortimore \& Blick's ``Seats Forfeited''
+list as its construct, having already rejected HC Library SN04594 (``Sitting Members imprisoned
+since 1945'') as a standalone source --- SN04594 is dominated by a single clustered 1986--91
+Northern Ireland Troubles-era protest-fine episode, unrelated to the personal/financial-misconduct
+construct the chapter needs.
+
+Documenting that rejection properly meant reading SN04594's own list in full, which surfaced two
+events inside the 1979--2025 window that fit the chapter's construct exactly but are absent from
+Mortimore \& Blick: Fiona Onasanya (2019, perverting the course of justice, removed via the
+first-ever successful Recall of MPs Act 2015 petition) and Mike Amesbury (2025, common assault,
+resigned under pressure after a suspended sentence). Both were verified independently of SN04594's
+summary --- Onasanya against UK Parliament's own recall-petition record, Amesbury against the CPS's
+own press release --- before being added.
+
+This is a correction to the base figure, not a robustness variant: $N$ moves from 8 to 10.
+Both added events fall in the 2009-or-later window, so the chapter's existing argument (misconduct
+resulting in loss of seat is a recent phenomenon, zero cases 1979--2008) is reinforced rather than
+disrupted. The pre-correction 8-event series is retained in
+\texttt{ch3\_fig34\_misconduct\_robustness.csv} as a labelled comparison row.
+
+\section{RC14--RC15 --- Figure 3.5's discretionary classification parameters}
+
+The reshuffle/standalone split (Figure 3.5, Panels A--B) rests on three discretionary choices,
+flagged as such when the classification was built: a same-day-endings threshold for what counts as
+a coordinated reshuffle (headline 5+), a lateral-move window for excluding same-person
+reappointments (14 days), and a government-ended window around each corrected handover date
+($\pm$3 days). All three were tested directly rather than left as unexamined defaults.
+
+The reshuffle threshold was already computed at 3, 5 and 10 in the classification script itself but
+had not previously been surfaced as an appendix table. All three thresholds show the same rising
+standalone-departure rate across 1979--2025; only the absolute level moves (216 events at the
+tightest threshold, 274 at the headline 5+, 340 at the loosest), exactly as expected since a looser
+threshold reclassifies some reshuffle-cluster departures as standalone.
+
+The two window parameters were tested by rebuilding the full classification pipeline under each
+alternative. Tightening the lateral-move window to 7 days or loosening it to 30 days moves the
+47-year standalone total by at most 6 events either side of the 274-event baseline (280 and 269
+respectively); loosening the government-ended window to $\pm$7 days moves it to 271. The rising
+trend across the five sub-periods is unchanged under every variant. None of the three parameters is
+load-bearing for the finding.
+
+\section{RC16 --- the scandal panel, two borderline cases, and a look-elsewhere trap}
+
+Figure 3.5's Panel C (financial-scandal departures) already carried an honest limitation: with only
+12 events across 47 years, a mean-shift Chow test and a Poisson rare-event likelihood-ratio test
+both found their peak candidate break at 1993, but neither reached significance under permutation
+(Chow $p=0.235$; Poisson $p=0.124$). Two cases were deliberately left out of that 12-event series as
+borderline --- Liam Fox (2011, the Werritty conflict-of-interest affair) and Tulip Siddiq (2025,
+resignation over reputational association rather than a personal finding of financial impropriety).
+Neither is a clean fit to Berlinski, Dewan \& Dowding's ``financial scandal'' construct, which is
+specifically about a minister's \emph{own} financial impropriety.
+
+Adding both (as a robustness variant only --- neither is added to the base figure) leaves the
+substantive conclusion unchanged: still no significant break by either test (Chow $p=0.176$;
+Poisson $p=0.094$), still peaking at 1993.
+
+Because 12--14 events over 47 years is a genuinely small sample, an exact-test complement was added
+alongside the search-based tests: a Poisson exact rate-ratio test and Fisher's exact test, applied
+at two different splits. The first split, 2008, is the real methodological seam already present in
+the data (Berlinski, Dewan \& Dowding's own audited 1979--2007 census versus this project's
+opportunistic 2008--2025 search) --- a split chosen for a reason external to the data, not searched
+for. It is null by every measure, with or without the two borderline cases (Poisson $p=1.00$/$0.59$;
+Fisher $p=0.70$/$0.46$).
+
+The second split, 1993, is the same year the Chow and Poisson \emph{search} procedures identified as
+their best candidate. Testing an exact test naively at exactly that point --- without correcting for
+having searched roughly 35 candidate years to find it --- produces an apparently significant result
+(Poisson $p=0.026$; Fisher $p=0.041$; both tighten slightly further with the two borderline cases
+included). This is not a second, independent confirmation of a 1993 break: it is the search
+procedure's own selection effect showing up when the correction for that selection is removed. The
+sup-statistic permutation tests already correct for this by permuting the entire search, which is
+precisely why they --- correctly --- do not find significance at the same point. Reported here
+because the discrepancy is itself instructive, not because it changes the finding: read together,
+the four tests support one conclusion, that the scandal series shows no detectable structural break
+at any pre-specified point, and that a search-identified candidate should never be tested again
+without the correction that found it in the first place.
+
+\section{RC17 --- Figure 3.7's mediation result under calendar-time detrending and
+first-differencing}
+
+Figure 3.7's headline finding is that professionalisation has a significant quadratic direct
+relationship with turbulence (linear term $p=0.0001$, quadratic term $p=0.0007$), while the
+indirect path via political trust is null (ACME $p=0.875$) --- read as evidence that
+professionalisation matters, just not through trust. The model uses a sequential lag structure
+(respecified 14 Sep 2026, replacing an earlier contemporaneous version that conflated a
+mediation claim with same-year measurement): Professionalisation$_{t-2}\to$Political
+Trust$_{t-1}\to$Turbulence$_t$, $N=45$ (1981--2025). Both professionalisation's PC1 and the
+canonical turbulence composite drift upward over the 47-year span, raising the standard concern
+that two independently-trending series can appear related without any real link between them,
+purely because both are moving in the same direction over time.
+
+Two independent detrending strategies were applied to check this, deliberately using different
+mechanisms so that agreement between them is informative rather than an artefact of one method's
+assumptions.
+
+The first adds linear and quadratic calendar-time terms directly to all three equations. Under
+this specification, professionalisation's direct relationship with turbulence in levels is no
+longer significant (linear $p=0.395$, quadratic $p=0.530$; Newey--West HAC $p=0.450$/$0.584$), its
+relationship with trust also disappears ($p=0.432$ OLS), and the already-null indirect effect
+stays null (ACME $p=0.940$). This matches the earlier finding on the contemporaneous version of
+this model: the quadratic \emph{levels} relationship does not survive controlling for a shared
+secular trend.
+
+The second strategy, first-differencing, removes any smooth trend (of whatever functional form)
+by construction rather than modelling it directly, preserving the same $t-2$/$t-1$/$t$ offsets in
+the differenced series. This time it does \textbf{not} reach the same conclusion: the change in
+professionalisation (2 years prior) shows a significant \emph{negative} relationship with the
+change in turbulence (direct effect $p=0.034$, total effect $p=0.050$, both Newey--West HAC; plain
+OLS is only marginal, $p=0.099$/$0.136$) --- the opposite sign to the positive levels relationship.
+This was checked for fragility before being reported, given the counter-intuitive sign flip: it is
+not driven by any single influential year (dropping the three years with the highest Cook's
+distance makes the result \emph{stronger}, not weaker --- OLS itself then crosses into
+significance, and the HAC $p$-value falls to $0.001$), and it is stable across Newey--West lag
+orders 0--4 ($p=0.029$--$0.042$ throughout), so it is not an artefact of the specific HAC lag
+choice either.
+
+A simpler, non-mediated alternative was also considered --- the plain bivariate
+Professionalisation$_{t-1}\to$Turbulence$_t$ quadratic relationship (R$^2=0.458$, quadratic term
+$p=5.0\times10^{-5}$, GAM edf$=2.70$) --- on the reasoning that since trust never mediates
+anything in any specification, the chapter's claim could rest on this simpler relationship
+instead. It does \emph{not} hold up as well as the full mediation model under the same two
+checks: the trend-adjusted quadratic term is null ($p=0.25$ OLS/$0.26$ HAC, GAM $p=0.42$), and
+first-differencing is also null (quadratic term $p=0.42$ OLS/$0.088$ HAC) --- unlike the full
+model, there is no significant finding left over on either check. The simpler bivariate framing
+was tried and set aside for this reason, not adopted.
+
+\textbf{Verdict, and how the chapter treats it}: Figure 3.7 is retained as the unadjusted,
+exploratory levels model --- the null finding on trust-mediation is unaffected by any of this, and
+the quadratic direct relationship it displays in levels should still not be read as a robust or
+causal effect of professionalisation on turbulence, since calendar-time detrending removes it.
+But unlike the contemporaneous version of this model (and unlike the simpler bivariate
+alternative above), first-differencing here does \emph{not} also support a null: it surfaces a
+distinct, checked-for-robustness, negative change-on-change relationship, opposite in sign to the
+positive levels association. The chapter text states the direct (levels) effect as an unadjusted
+association, not a causal claim, and reports the first-differenced finding as a separate result in
+its own right rather than a second confirmation of the same one.
+
+\section{RC18 --- the combined bad-behaviour count against professionalisation and against
+turbulence}
+
+PJ, 14 Sep 2026: "is there a way to map scandals to the PCA index -- not just MPs but all of them
+together (not devolved) -- need to model for zero cases." The combined series pools the Commons
+misconduct series (Fig.\ 3.3, systematic Mortimore \& Blick census), the House of Lords case list,
+and the local government case list (illustrative, web-compiled -- see the respective source
+notes) into one annual count, $N=44$ events over 47 years, 25 of them (53\%) zero-event years.
+Ministerial scandal resignations were tried and dropped from the pool (worse fit on every test,
+including the direction that matters most -- see the header of
+\texttt{72\_combined\_scandals\_vs\_professionalisation.R} for the full comparison). Because most
+years are zero, Poisson regression is used for scandal-as-outcome models rather than OLS/
+correlation, matching the change-point tests used elsewhere in this chapter.
+
+Three directions were tested, all significant at baseline: professionalisation PC1 predicting the
+combined scandal count (Poisson, IRR $\approx1.75$--$1.81$ by lag, $p<0.0001$, McFadden
+$R^2=0.23$--$0.24$); the combined scandal count predicting professionalisation PC1 (OLS,
+$R^2=0.37$--$0.41$, $p<0.0001$); and the combined scandal count predicting the actual Ch2
+turbulence PC1 -- the book's real dependent variable, and the direction that matters most for the
+chapter's argument (OLS, coefficient $0.39$--$0.44$ by lag, $p=0.007$--$0.017$,
+$R^2=0.12$--$0.16$).
+
+The same detrending discipline as RC17 was applied to all three. The professionalisation
+$\leftrightarrow$ scandal relationship, in \emph{either} direction, does not survive: year-control
+kills it (professionalisation $\to$ scandal $p=0.81$; scandal $\to$ professionalisation $p=0.66$),
+first-differencing kills it again by an independent route ($p=0.70$ and $p=0.78$ respectively),
+and a quadratic/GAM check confirms both directions are genuinely linear with zero curvature (GAM
+edf$=1.00$ exactly, both directions) -- so there is nothing non-linear being missed either. This
+is a textbook shared-trend artefact: both series drift upward over the period and appear related
+purely because of that.
+
+The scandal $\to$ turbulence direction is more interesting and holds up somewhat better, though
+still short of a causal-grade finding. Year-control weakens it to non-significance
+($p=0.19$--$0.24$ depending on lag) but does not obliterate it the way it does the
+professionalisation relationship -- the coefficient direction and magnitude stay similar, they
+simply lose significance with only 47 years of data and a year-trend term added. First-differencing
+does fully kill it ($p=0.87$--$0.97$ at every lag), so it cannot be read as robust to a
+change-on-change specification. A quadratic/GAM check found apparent curvature at every lag
+(quadratic term $p=0.05$; GAM $p=0.02$--$0.03$, edf $1.8$--$2.2$), but this too fails to survive
+year-control (GAM $p$ rises to $0.13$--$0.15$) and is confirmed as a trend artefact, not a real
+non-linearity, the same conclusion as RC17's parallel check.
+
+\textbf{Verdict, and how the chapter treats it}: none of the three tested directions supports a
+robust, trend-independent, causal-grade relationship. The professionalisation-scandal link (both
+directions) is fully explained by a shared secular trend. The scandal-turbulence link is the
+closest to a real finding -- it survives year-control better than the other two links do, even
+though it does not survive first-differencing -- but should be read as suggestive rather than
+established. The chapter text reports the bivariate association and its curved shape honestly,
+while noting (per footnote, referencing this table) that it "disappears completely when accounting
+for the time dependencies of these series."

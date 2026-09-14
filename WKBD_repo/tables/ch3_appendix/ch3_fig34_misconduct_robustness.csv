@@ -1,0 +1,4 @@
+check,n_events,n_pre_2009,n_2009_plus
+"Baseline (corrected, 11 Sep 2026 — as built)",10,0,10
+"A. Exclude regime-shift events (Illsley, MacShane)",8,0,8
+"C. Historical pre-correction series (Onasanya, Amesbury excluded)",8,0,8

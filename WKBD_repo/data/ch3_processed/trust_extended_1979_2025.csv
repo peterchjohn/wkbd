@@ -1,0 +1,48 @@
+year,trust_pct,data_source,note
+1979,18.341733880599342,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1980,17.779032418808708,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1981,16.987040994894425,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1982,16.339592433046676,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1983,15.604761658915384,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1984,14.90661741580966,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1985,13.875905839680968,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+1986,40,BSA 41 Table 3 (OBSERVED),NA
+1987,37,BSA 41 Table 3 (OBSERVED),NA
+1988,20.67360568669328,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1989,22.973703687545353,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1990,25.42533981809799,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1991,33,BSA 41 Table 3 (OBSERVED),NA
+1992,28.99723370627124,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1993,29.52065823953964,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1994,24,BSA 41 Table 3 (OBSERVED),NA
+1995,30.709442014995155,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: neither BSA nor TrustGov has a real reading this year — double-interpolated (TrustGov's random-walk, then this calibration)."
+1996,22,BSA 41 Table 3 (OBSERVED),NA
+1997,33,BSA 41 Table 3 (OBSERVED),NA
+1998,28,BSA 41 Table 3 (OBSERVED),NA
+1999,28.44204815209617,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2000,16,BSA 41 Table 3 (OBSERVED),NA
+2001,28,BSA 41 Table 3 (OBSERVED),NA
+2002,26,BSA 41 Table 3 (OBSERVED),NA
+2003,18,BSA 41 Table 3 (OBSERVED),NA
+2004,17.149920555672676,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2005,26,BSA 41 Table 3 (OBSERVED),NA
+2006,20.985839269639012,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2007,29,BSA 41 Table 3 (OBSERVED),NA
+2008,18.262170548882917,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2009,16,BSA 41 Table 3 (OBSERVED),NA
+2010,20,BSA 41 Table 3 (OBSERVED),NA
+2011,22,BSA 41 Table 3 (OBSERVED),NA
+2012,18,BSA 41 Table 3 (OBSERVED),NA
+2013,17,BSA 41 Table 3 (OBSERVED),NA
+2014,22.361371957651414,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2015,24.320775225550623,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2016,22,BSA 41 Table 3 (OBSERVED),NA
+2017,20,BSA 41 Table 3 (OBSERVED),NA
+2018,23.32222151343623,TrustGov-calibrated (INTERPOLATED),"HEALTH WARNING: BSA has no reading this year, but TrustGov's OWN input does — one step of interpolation, not two."
+2019,15,BSA 41 Table 3 (OBSERVED),NA
+2020,23,BSA 41 Table 3 (OBSERVED),NA
+2021,23.000000000000004,Ipsos-calibrated (INTERPOLATED),"HEALTH WARNING: not an observed BSA reading — calibrated from Ipsos Veracity via spec B (Tier-1 overlap years, see trust_extend_2021_2025_robustness.csv)"
+2022,15.399999999999999,Ipsos-calibrated (INTERPOLATED),"HEALTH WARNING: not an observed BSA reading — calibrated from Ipsos Veracity via spec B (Tier-1 overlap years, see trust_extend_2021_2025_robustness.csv)"
+2023,14,BSA 41 Table 3 (OBSERVED),NA
+2024,12,BSA 41 Table 3 (OBSERVED),NA
+2025,12.14285714285714,Ipsos-calibrated (INTERPOLATED),"HEALTH WARNING: not an observed BSA reading — calibrated from Ipsos Veracity via spec B (Tier-1 overlap years, see trust_extend_2021_2025_robustness.csv)"

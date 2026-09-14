@@ -1,0 +1,22 @@
+# UK general election NATIONAL vote shares (%), 1945-1979 — for the 4-category Pedersen
+# extension of the UK series back to 1950 (Panel B). Con / Lab / Lib(=centre third-party bloc);
+# Other = 100 - con - lab - lib.
+# Source: House of Commons Library, "UK Election Statistics: 1918-2023" (CBP-7529) and Research
+# Paper 01/37, drawing on Rallings & Thrasher, British Electoral Facts. Figures cross-checked
+# against Wikipedia election infoboxes: 1955 Con 49.7, 1951 Lab 48.8, Feb-1974 37.9/37.2/19.3,
+# Oct-1974 35.8/39.2/18.3 — all confirmed.
+# xyear encodes the two 1974 elections separately: Feb-1974 = 1974.12, Oct-1974 = 1974.75.
+# 1945 row is the baseline for the 1950 change only; 1979 row is a continuity check against the
+# book's own ped_4cat 1979 value (8.4) — the book's value is the one used from 1979 on.
+xyear,con,lab,lib
+1945,39.8,47.7,9.0
+1950,43.4,46.1,9.1
+1951,48.0,48.8,2.6
+1955,49.7,46.4,2.7
+1959,49.4,43.8,5.9
+1964,43.4,44.1,11.2
+1966,41.9,47.9,8.5
+1970,46.4,43.0,7.5
+1974.12,37.9,37.2,19.3
+1974.75,35.8,39.2,18.3
+1979,43.9,36.9,13.8

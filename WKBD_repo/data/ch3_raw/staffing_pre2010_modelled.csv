@@ -1,0 +1,9 @@
+financial_year,cal_year,n_mps,mean_staffing_nominal,mean_staffing_real_2015,election_year_filter,is_modelled,allowance_max_nominal,utilisation_rate,source_note
+78-79,1979,635,7166,29676,TRUE,TRUE,8431,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+82-83,1983,650,13940,38800,TRUE,TRUE,16400,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+86-87,1987,650,19200,44880,TRUE,TRUE,22588,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+91-92,1992,651,24638,42500,TRUE,TRUE,28986,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+96-97,1997,659,36557,56400,TRUE,TRUE,43008,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+00-01,2001,659,48510,70500,TRUE,TRUE,57070,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+04-05,2005,646,68850,91700,TRUE,TRUE,81000,0.85,HC Annual Report on Members' Allowances (approx); utilisation 85%
+09-10,2010,650,85174,97400,FALSE,TRUE,100205,0.85,HC Annual Report on Members' Allowances 2009-10; last HC year before IPSA
